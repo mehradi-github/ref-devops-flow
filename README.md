@@ -10,7 +10,9 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
     - [Some of important Linux commands](#some-of-important-linux-commands)
   - [Installing Git](#installing-git)
-  - [Installing Docker on Amazon Linux server](#installing-docker-on-amazon-linux-server)
+  - [Setup Docker](#setup-docker)
+    - [Installing Docker on Amazon Linux server](#installing-docker-on-amazon-linux-server)
+    - [Docker Hub Quickstart](#docker-hub-quickstart)
   - [Setup Jenkins](#setup-jenkins)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
@@ -68,9 +70,46 @@ ssh user3@192.168.80.129
 yum install git -y
 ```
 
-## Installing Docker on Amazon Linux server
+## Setup Docker
+
+### Installing Docker on Amazon Linux server
 
 ```sh
+yum install docker -y
+docker -v
+
+# start docker services
+sudo systemctl enable docker
+sudo systemctl start docker
+service docker status
+
+useradd dockeradmin
+passwd dockeradmin
+usermod -aG docker dockeradmin
+
+```
+### Docker Hub Quickstart
+[Docker Hub](https://docs.docker.com/docker-hub) is a service provided by Docker for finding and sharing container images with your team. It is the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
+
+```sh
+docker pull alpine:latest
+
+mkdir /home/demo && touch /home/demo/Dockerfile 
+cd /home/demo
+cat > Dockerfile <<EOF 
+FROM alpine:latest
+CMD echo "Hello world!"
+EOF
+
+docker build -t <your_username>/my-hello .
+docker image ls
+
+rm -rf /home/demo
+
+docker run <your_username>/my-hello
+
+docker login
+docker push <your_username>/my-hello
 
 ```
 
