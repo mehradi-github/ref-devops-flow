@@ -8,6 +8,9 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
   - [Run Amazon Linux 2 as a virtual machine on premises](#run-amazon-linux-2-as-a-virtual-machine-on-premises)
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
+    - [Some of important Linux commands](#some-of-important-linux-commands)
+  - [Installing Git](#installing-git)
+  - [Installing Docker on Amazon Linux server](#installing-docker-on-amazon-linux-server)
   - [Setup Jenkins](#setup-jenkins)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
@@ -26,15 +29,39 @@ The key generation utility – [PuTTYgen](https://www.puttygen.com) can create v
 ### Boot and connect to your new VM
 The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigator panel, right-click the new virtual machine and choose Edit Settings. for New CD/DVD Drive, choose *seed.iso* File.
 
-The following command will get you the private IP address of your interfaces:
+### Some of important Linux commands
 ```sh
+#display all interfaces which are currently available, even if down
 ifconfig -a
-```
-```sh
+#What Is My IP Address?
+curl ifconfig.me
+
+#Linux system shutdown | reboot
+sudo systemctl poweroff
+sudo reboot
+
+#Create a user
+useradd [options] USERNAME
+passwd USERNAME
+#Assigning Sudo Rights to a user
+usermod -aG sudo USERNAME
+groups USERNAME
+
 ssh user3@192.168.80.129
 ```
 
 
+## Installing Git
+
+```sh
+yum install git -y
+```
+
+## Installing Docker on Amazon Linux server
+
+```sh
+
+```
 
 ## Setup Jenkins
 Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
