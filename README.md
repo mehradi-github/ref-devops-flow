@@ -26,6 +26,13 @@ The seed.iso boot image includes the initial configuration information that is n
 
 The key generation utility – [PuTTYgen](https://www.puttygen.com) can create various public-key cryptosystems including Rivest–Shamir–Adleman (RSA), Digital Signature Algorithm (DSA), Elliptic Curve Digital Signature Algorithm (ECDSA), and Edwards-curve Digital Signature Algorithm (EdDSA) keys.Although PuTTYgen collects keys in its native file format i.e. **.ppk** files, the keys can easily be converted to any file format.
 
+```sh
+ssh-keygen -t rsa -b 4096
+ssh-keygen -t dsa 
+ssh-keygen -t ecdsa -b 521
+ssh-keygen -t ed25519
+```
+
 ### Boot and connect to your new VM
 The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigator panel, right-click the new virtual machine and choose Edit Settings. for New CD/DVD Drive, choose *seed.iso* File.
 
