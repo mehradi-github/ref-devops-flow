@@ -43,17 +43,21 @@ ifconfig -a
 #What Is My IP Address?
 curl ifconfig.me
 
-#Linux system shutdown | reboot
-sudo systemctl poweroff
-sudo reboot
-
 #Create a user
 useradd [options] USERNAME
 passwd USERNAME
 #Assigning Sudo Rights to a user
-usermod -aG sudo USERNAME
+usermod -aG wheel USERNAME
 groups USERNAME
 
+#Remove a user from a group
+sudo gpasswd -d USERNAME wheel
+
+#Linux system shutdown | reboot
+sudo systemctl poweroff
+sudo reboot
+
+service sshd reload
 ssh user3@192.168.80.129
 ```
 
