@@ -13,6 +13,8 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
   - [Setup Docker](#setup-docker)
     - [Installing Docker on Amazon Linux server](#installing-docker-on-amazon-linux-server)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
+  - [Setup Kubernetes (K8s)](#setup-kubernetes-k8s)
+    - [Install kubectl binary with curl](#install-kubectl-binary-with-curl)
   - [Setup Jenkins](#setup-jenkins)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
@@ -112,6 +114,27 @@ docker login
 docker push <your_username>/my-hello
 
 ```
+
+## Setup Kubernetes (K8s)
+[Kubernetes](https://kubernetes.io/docs/concepts/overview), also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+
+### Install kubectl binary with curl
+[Install and Set Up kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux)
+
+```sh
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+kubectl version --client --output=yaml  
+```
+
 
 ## Setup Jenkins
 Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
