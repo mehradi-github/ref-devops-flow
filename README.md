@@ -63,6 +63,18 @@ sudo reboot
 
 service sshd reload
 ssh user3@192.168.80.129
+
+
+scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
+cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
+# OR
+ssh-copy-id USER@<target-server>
+
+vi /etc/ssh/sshd_config => passwordAthuntication no
+service ssh restart
+service sshd reload
+ssh USER@<target-server>`
+
 ```
 
 
