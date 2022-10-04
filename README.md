@@ -29,10 +29,10 @@ The seed.iso boot image includes the initial configuration information that is n
 The key generation utility – [PuTTYgen](https://www.puttygen.com) can create various public-key cryptosystems including Rivest–Shamir–Adleman (RSA), Digital Signature Algorithm (DSA), Elliptic Curve Digital Signature Algorithm (ECDSA), and Edwards-curve Digital Signature Algorithm (EdDSA) keys.Although PuTTYgen collects keys in its native file format i.e. **.ppk** files, the keys can easily be converted to any file format.
 
 ```sh
-ssh-keygen -t rsa -b 4096
-ssh-keygen -t dsa 
-ssh-keygen -t ecdsa -b 521
-ssh-keygen -t ed25519
+ssh-keygen -f <filename> -t rsa -b 4096
+ssh-keygen -f <filename> -t dsa 
+ssh-keygen -f <filename> -t ecdsa -b 521
+ssh-keygen -f <filename> -t ed25519
 ```
 
 ### Boot and connect to your new VM
@@ -59,11 +59,11 @@ sudo gpasswd -d USERNAME wheel
 
 #scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
 #cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
-ssh-copy-id USER@<target-server>
-vi /etc/ssh/sshd_config => passwordAthuntication no
+ssh-copy-id -i ~/.ssh/mykey USERNAME@<target-server>
+vi /etc/ssh/sshd_config # passwordAthuntication no
 service ssh restart
 service sshd reload
-ssh USER@<target-server>
+ssh USERNAME@<target-server>
 
 
 #Linux system shutdown | reboot
@@ -89,7 +89,6 @@ echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
-kubectl version --client
 kubectl version --client --output=yaml  
 ```
 ### Installing Docker
@@ -142,6 +141,14 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 minikube start
 kubectl get po -A
 minikube dashboard
+
+# To access the dashboard remotely, run the following command:
+minikube dashboard --url=true
+kubectl proxy --address='0.0.0.0' --disable-filter=true
+
+minikube pause
+minikube unpause
+minikube stop
 
 
 ```
