@@ -14,6 +14,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Installing Docker](#installing-docker)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Installing minikube](#installing-minikube)
+    - [Installing Helm](#installing-helm)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -40,7 +41,11 @@ The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigat
 
 ### Some of important Linux commands
 ```sh
-#display all interfaces which are currently available, even if down
+#How to find the Linux distribution
+cat /etc/os-release
+hostnamectl
+
+#Display all interfaces which are currently available, even if down
 ifconfig -a
 #What Is My IP Address?
 curl ifconfig.me
@@ -150,6 +155,22 @@ minikube pause
 minikube unpause
 minikube stop
 
+
+```
+
+### Installing Helm
+[Helm](https://helm.sh/docs/) is the package manager for Kubernetes, Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
+
+This guide shows how to [install the Helm CLI](https://helm.sh/docs/intro/install/). 
+
+```sh
+wget https://get.helm.sh/helm-v3.10.0-linux-amd64.tar.gz
+tar -zxvf helm-v3.10.0-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin/helm
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm search repo bitnami
+helm repo update              # Make sure we get the latest list of charts
 
 ```
 
