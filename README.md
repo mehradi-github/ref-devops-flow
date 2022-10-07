@@ -15,6 +15,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Installing minikube](#installing-minikube)
     - [Installing Helm](#installing-helm)
+  - [Install Jenkins with Helm v3](#install-jenkins-with-helm-v3)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -175,6 +176,28 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm search repo bitnami
 helm repo update              # Make sure we get the latest list of charts
 
+```
+## Install Jenkins with Helm v3
+[Jenkins](https://www.jenkins.io/doc/book/installing/kubernetes/) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
+
+Add the Jenkins repo as follows:
+
+```sh
+helm repo add jenkinsci https://charts.jenkins.io
+helm repo update
+```
+The helm charts in the Jenkins repo can be listed with the command:
+```sh
+helm search repo jenkinsci
+```
+Minikube configured for hostPath sets the permissions on /data to the root account only. Once the volume is created you will need to manually change the permissions to allow the jenkins account to write its data.
+```sh
+minikube ssh
+sudo chown -R 1000:1000 /data/jenkins-volume
+```
+create a volume which is called [jenkins-pv](./src/kubernetes/jenkins-volume.yaml):
+```sh
+kubectl apply -f jenkins-volume.yaml
 ```
 
 
