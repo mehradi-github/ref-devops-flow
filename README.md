@@ -199,7 +199,11 @@ create a volume which is called [jenkins-pv](./src/kubernetes/jenkins-volume.yam
 ```sh
 kubectl apply -f jenkins-volume.yaml
 ```
-
+Run the following command to apply [jenkins-sa](./src/kubernetes/jenkins-sa.yaml)
+```sh
+kubectl apply -f jenkins-sa.yaml
+#minikube start --extra-config=apiserver.authorization-mode=RBAC
+```
 
 <!-- ## Installing Git
 
