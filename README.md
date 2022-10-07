@@ -16,6 +16,10 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Installing minikube](#installing-minikube)
     - [Installing Helm](#installing-helm)
   - [Install Jenkins with Helm v3](#install-jenkins-with-helm-v3)
+    - [Configure Helm](#configure-helm)
+    - [Create a persistent volume](#create-a-persistent-volume)
+    - [Create a service account](#create-a-service-account)
+    - [Install Jenkins](#install-jenkins)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -179,7 +183,7 @@ helm repo update              # Make sure we get the latest list of charts
 ```
 ## Install Jenkins with Helm v3
 [Jenkins](https://www.jenkins.io/doc/book/installing/kubernetes/) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
-
+### Configure Helm
 Add the Jenkins repo as follows:
 
 ```sh
@@ -195,15 +199,18 @@ Minikube configured for hostPath sets the permissions on /data to the root accou
 minikube ssh
 sudo chown -R 1000:1000 /data/jenkins-volume
 ```
-create a volume which is called [jenkins-pv](./src/kubernetes/jenkins-volume.yaml):
+### Create a persistent volume
+Create a volume which is called [jenkins-pv](./src/kubernetes/jenkins-volume.yaml):
 ```sh
 kubectl apply -f jenkins-volume.yaml
 ```
-Run the following command to apply [jenkins-sa](./src/kubernetes/jenkins-sa.yaml)
+### Create a service account
+Run the following command to apply [jenkins-sa](./src/kubernetes/jenkins-sa.yaml):
 ```sh
 kubectl apply -f jenkins-sa.yaml
 #minikube start --extra-config=apiserver.authorization-mode=RBAC
 ```
+### Install Jenkins
 We will deploy Jenkins including the Jenkins Kubernetes plugin. See the [official chart](https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins) for more details.
 
 Open the [jenkins-values.yaml](https://raw.githubusercontent.com/jenkinsci/helm-charts/main/charts/jenkins/values.yaml) file in your favorite text editor and modify the following:
@@ -222,6 +229,15 @@ Open the [jenkins-values.yaml](https://raw.githubusercontent.com/jenkinsci/helm-
    ```   
    Where `name: jenkins` refers to the serviceAccount created for jenkins.
 - We can also define which plugins we want to install on our Jenkins. We use some default plugins like git and the pipeline plugin.
+
+
+Now you can install Jenkins:
+
+```sh
+chart=jenkinsci/jenkins
+helm install jenkins -n jenkins -f jenkins-values.yaml $chart
+```
+
 <!-- ## Installing Git
 
 ```sh
