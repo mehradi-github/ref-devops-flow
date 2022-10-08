@@ -49,6 +49,17 @@ The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigat
 #How to find the Linux distribution
 cat /etc/os-release
 hostnamectl
+#User List
+cat /etc/passwd
+#Group list
+cat /etc/group
+
+su - USER
+whoami
+id
+ 
+#CTRL+L
+clear
 
 #Display all interfaces which are currently available, even if down
 ifconfig -a
@@ -202,6 +213,7 @@ sudo chown -R 1000:1000 /data/jenkins-volume
 ### Create a persistent volume
 Create a volume which is called [jenkins-pv](./src/kubernetes/jenkins-volume.yaml):
 ```sh
+kubectl create namespace jenkins
 kubectl apply -f jenkins-volume.yaml
 ```
 ### Create a service account
@@ -237,7 +249,29 @@ Now you can install Jenkins:
 chart=jenkinsci/jenkins
 helm install jenkins -n jenkins -f jenkins-values.yaml $chart
 ```
+1. Get your 'admin' user password by running:
+    ```sh
+    jsonpath="{.data.jenkins-admin-password}"
+    secret=$(kubectl get secret -n jenkins jenkins -o jsonpath=$jsonpath)
+    echo $(echo $secret | base64 --decode)
+    ```
+2. Get the Jenkins URL to visit by running these commands in the same shell:
+    ```sh
+    jsonpath="{.spec.ports[0].nodePort}"
+    NODE_PORT=$(kubectl get -n jenkins -o jsonpath=$jsonpath services jenkins)
+    jsonpath="{.items[0].status.addresses[0].address}"
+    NODE_IP=$(kubectl get nodes -n jenkins -o jsonpath=$jsonpath)
+    echo http://$NODE_IP:$NODE_PORT/login
+    ```
+3. Login with the password from step 1 and the username: admin
 
+
+```sh
+kubectl get pods -n jenkins
+kubectl describe pod NAME
+kubectl logs NAME
+kubectl delete pod NAME --grace-period=0 --force --namespace NAMESPACE
+```
 <!-- ## Installing Git
 
 ```sh
