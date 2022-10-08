@@ -267,7 +267,18 @@ helm install jenkins -n jenkins -f jenkins-values.yaml $chart
 
 
 ```sh
+kubectl get namespaces
+kubectl get all -n jenkins
+kubectl get pv
+
+helm list -n jenkins
+helm uninstall jenkins -n jenkins
+
+
 kubectl get pods -n jenkins
+kubectl logs <pod_name> -n jenkins
+kubectl describe pod <pod_name> -n jenkins
+
 kubectl describe pod NAME
 kubectl logs NAME
 kubectl delete pod NAME --grace-period=0 --force --namespace NAMESPACE

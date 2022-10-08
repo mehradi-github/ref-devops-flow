@@ -1,24 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: helloworld-deployment
+  name: helloworld-hostpath
+  labels:
+    name: helloworld-hostpath
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: helloworld
-  template:
-    metadata:
-      labels:
-        app: helloworld
-    spec:
-      containers:
-      - name: my-hello
-        image: mehradi/my-hello
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - name: nodejs-port
-          containerPort: 3000
+  containers:
+  - name: my-hello
+    image: mehradi/my-hello
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "50m"
+    volumeMounts:
+      - mountPath: /test-mnt
+        name: test-vol
+  volumes:
+    - name: test-vol
+      hostPath:
+        path: /test-vol     
