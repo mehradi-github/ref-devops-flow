@@ -15,11 +15,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Installing minikube](#installing-minikube)
     - [Installing Helm](#installing-helm)
-  - [Install Jenkins with Helm v3](#install-jenkins-with-helm-v3)
-    - [Configure Helm](#configure-helm)
-    - [Create a persistent volume](#create-a-persistent-volume)
-    - [Create a service account](#create-a-service-account)
-    - [Install Jenkins](#install-jenkins)
+  - [Installing Jenkins(LTS)](#installing-jenkinslts)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -192,7 +188,31 @@ helm search repo bitnami
 helm repo update              # Make sure we get the latest list of charts
 
 ```
-## Install Jenkins with Helm v3
+
+## Installing Jenkins(LTS)
+[Jenkins](https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
+
+```sh
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+# sudo yum install java-11-openjdk
+sudo amazon-linux-extras install epel 
+sudo amazon-linux-extras install java-openjdk11 
+sudo yum install jenkins
+sudo systemctl daemon-reload
+
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+# Setup Jenkins to start at boot,
+#chkconfig jenkins on
+```
+
+
+<!-- ## Install Jenkins with Helm v3
 [Jenkins](https://www.jenkins.io/doc/book/installing/kubernetes/) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
 ### Configure Helm
 Add the Jenkins repo as follows:
@@ -263,10 +283,10 @@ helm install jenkins -n jenkins -f jenkins-values.yaml $chart
     NODE_IP=$(kubectl get nodes -n jenkins -o jsonpath=$jsonpath)
     echo http://$NODE_IP:$NODE_PORT/login
     ```
-3. Login with the password from step 1 and the username: admin
+3. Login with the password from step 1 and the username: admin -->
 
 
-```sh
+<!-- ```sh
 kubectl get namespaces
 kubectl get all -n jenkins
 kubectl get pv
@@ -282,7 +302,7 @@ kubectl describe pod <pod_name> -n jenkins
 kubectl describe pod NAME
 kubectl logs NAME
 kubectl delete pod NAME --grace-period=0 --force --namespace NAMESPACE
-```
+``` -->
 <!-- ## Installing Git
 
 ```sh
