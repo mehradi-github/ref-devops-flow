@@ -15,7 +15,10 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Installing minikube](#installing-minikube)
     - [Installing Helm](#installing-helm)
-  - [Installing Jenkins(LTS)](#installing-jenkinslts)
+  - [Installing Jenkins](#installing-jenkins)
+    - [LTS (Long-Term Support) release](#lts-long-term-support-release)
+    - [Unlocking Jenkins](#unlocking-jenkins)
+  - [Installing Ansible](#installing-ansible)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -82,6 +85,10 @@ service ssh restart
 service sshd reload
 ssh USERNAME@<target-server>
 
+sudo yum list installed | wc -l
+sudo yum list installed > my_list.txt
+sudo yum list installed | egrep -i <NAME>
+sudo yum update
 
 #Linux system shutdown | reboot
 sudo systemctl poweroff
@@ -189,9 +196,9 @@ helm repo update              # Make sure we get the latest list of charts
 
 ```
 
-## Installing Jenkins(LTS)
+## Installing Jenkins
 [Jenkins](https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
-
+### LTS (Long-Term Support) release
 ```sh
 sudo wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/redhat-stable/jenkins.repo
@@ -210,6 +217,80 @@ sudo systemctl status jenkins
 # Setup Jenkins to start at boot,
 #chkconfig jenkins on
 ```
+### Unlocking Jenkins
+1. Browse to http://localhost:8080
+2. The command: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword` will print the password at console.
+
+
+## Installing Ansible
+[Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) automates the management of remote systems and controls their desired state.A basic Ansible environment has three main components:
+- Control node:
+A system on which Ansible is installed. You run Ansible commands such as ansible or ansible-inventory on a control node.
+
+- Managed node:
+A remote system, or host, that Ansible controls.
+
+- Inventory:
+A list of managed nodes that are logically organized. You create an inventory on the control node to describe host deployments to Ansible. 
+
+<img src="public/assets/images/ansible_basic.svg" alt="Basic components of an Ansible environment include a control node, an inventory of managed nodes, and a module copied to each managed node." width="200" height="241">
+
+```sh
+#Install python and python-pip
+sudo yum install -y amazon-linux-extras
+amazon-linux-extras | grep -i python
+sudo amazon-linux-extras enable python3.8
+sudo yum install python3.8
+
+
+#Install from source
+
+
+sudo yum -y update
+sudo yum -y groupinstall "Development Tools"
+sudo yum -y install openssl-devel bzip2-devel libffi-devel
+
+sudo yum -y install wget
+wget https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tg
+
+tar xvf Python-3.8.12.tgz
+cd Python-3.8*/
+./configure --enable-optimizations
+sudo make altinstall
+
+python3.8 --version
+
+#Setting Default Python
+sudo alternatives --install /usr/bin/python python /usr/bin/python3.8 1
+
+#Confirm the new setting.
+sudo alternatives --list | grep python
+sudo alternatives --config python
+python -V
+python -m pip -V
+#If you see an error like No module named pip
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py --user
+
+#Install ansible using pip check for version
+python -m pip install  --user ansible
+ansible --version
+
+#Create a user called ansadmin & grant sudo access to ansadmin user using "visudo" command (on Control node and Managed host)
+useradd ansadmin
+passwd ansadmin
+echo "ansadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+#Log in as a ansadmin user on master and generate ssh key (on Control node)
+sudo su - ansadmin
+ssh-keygen
+#Copy keys onto all ansible managed hosts (on Control node)
+ssh-copy-id ansadmin@<target-server>
+#Validation test
+ansible all -m ping
+
+```
+
 
 
 <!-- ## Install Jenkins with Helm v3
