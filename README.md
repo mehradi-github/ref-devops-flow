@@ -17,8 +17,6 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Kubernetes Cluster installation using kubeadm](#kubernetes-cluster-installation-using-kubeadm)
     - [Installing Helm](#installing-helm)
   - [Installing Jenkins](#installing-jenkins)
-    - [LTS (Long-Term Support) release](#lts-long-term-support-release)
-    - [Unlocking Jenkins](#unlocking-jenkins)
   - [Installing Ansible](#installing-ansible)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
@@ -184,7 +182,7 @@ minikube stop
 
 Kubeadm is a tool built to provide kubeadm init and kubeadm join as best-practice "fast paths" for creating Kubernetes clusters.
 kubeadm performs the actions necessary to get a minimum viable cluster up and running. By design, it cares only about bootstrapping, not about provisioning machines.
-More detailes: [**Kubernetes Cluster installation using kubeadm**](https://github.com/mehradi-github/Kubernetes-kubeadm#kubernetes-cluster-installation-using-kubeadm)
+More details: [**Kubernetes Cluster installation using kubeadm**](https://github.com/mehradi-github/Kubernetes-kubeadm#kubernetes-cluster-installation-using-kubeadm)
 
 ### Installing Helm
 [Helm](https://helm.sh/docs/) is the package manager for Kubernetes, Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
@@ -204,32 +202,11 @@ helm repo update              # Make sure we get the latest list of charts
 
 ## Installing Jenkins
 [Jenkins](https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
-### LTS (Long-Term Support) release
-```sh
-sudo wget -O /etc/yum.repos.d/jenkins.repo \
-    https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum upgrade
-# Add required dependencies for the jenkins package
-# sudo yum install java-11-openjdk
-sudo amazon-linux-extras install epel 
-sudo amazon-linux-extras install java-openjdk11 
-sudo yum install jenkins
-sudo systemctl daemon-reload
-
-sudo systemctl enable jenkins
-sudo systemctl start jenkins
-sudo systemctl status jenkins
-# Setup Jenkins to start at boot,
-#chkconfig jenkins on
-```
-### Unlocking Jenkins
-1. Browse to http://localhost:8080
-2. The command: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword` will print the password at console.
+More details: [**Installing Jenkins(LTS)**](https://github.com/mehradi-github/devops-jenkins#installing-jenkinslts)
 
 
 ## Installing Ansible
-Ansible automates the management of remote systems and controls their desired state. more detailes [Automation with Ansible playbooks](https://github.com/mehradi-github/automation-with-ansible-playbooks#automation-with-ansible-playbooks)
+Ansible automates the management of remote systems and controls their desired state. more details [**Automation with Ansible playbooks**](https://github.com/mehradi-github/automation-with-ansible-playbooks#automation-with-ansible-playbooks)
 
 <!-- ## Install Jenkins with Helm v3
 [Jenkins](https://www.jenkins.io/doc/book/installing/kubernetes/) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
