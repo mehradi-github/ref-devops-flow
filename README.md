@@ -13,7 +13,8 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Install kubectl binary with curl](#install-kubectl-binary-with-curl)
     - [Installing Docker](#installing-docker)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
-    - [Installing minikube](#installing-minikube)
+    - [Kubernetes Cluster installation using minikube](#kubernetes-cluster-installation-using-minikube)
+    - [Kubernetes Cluster installation using kubeadm](#kubernetes-cluster-installation-using-kubeadm)
     - [Installing Helm](#installing-helm)
   - [Installing Jenkins](#installing-jenkins)
     - [LTS (Long-Term Support) release](#lts-long-term-support-release)
@@ -156,7 +157,7 @@ docker push <your_username>/my-hello
 
 ```
 
-### Installing minikube
+### Kubernetes Cluster installation using minikube
 [minikube](https://minikube.sigs.k8s.io/docs/start/) is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes. to install the latest minikube stable release: 
 ```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -179,6 +180,11 @@ minikube stop
 
 
 ```
+### Kubernetes Cluster installation using kubeadm
+
+Kubeadm is a tool built to provide kubeadm init and kubeadm join as best-practice "fast paths" for creating Kubernetes clusters.
+kubeadm performs the actions necessary to get a minimum viable cluster up and running. By design, it cares only about bootstrapping, not about provisioning machines.
+More detailes: [**Kubernetes Cluster installation using kubeadm**](https://github.com/mehradi-github/Kubernetes-kubeadm#kubernetes-cluster-installation-using-kubeadm)
 
 ### Installing Helm
 [Helm](https://helm.sh/docs/) is the package manager for Kubernetes, Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
