@@ -58,6 +58,8 @@ id
  
 #CTRL+L
 clear
+#Grabing an ip automatically from DHCP
+dhclient -v
 
 #Display all interfaces which are currently available, even if down
 ifconfig -a
