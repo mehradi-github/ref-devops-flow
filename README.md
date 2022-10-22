@@ -18,6 +18,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Installing Helm](#installing-helm)
   - [Installing Jenkins](#installing-jenkins)
   - [Installing Ansible](#installing-ansible)
+  - [Installing Skaffold](#installing-skaffold)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -209,6 +210,18 @@ More details: [**Installing Jenkins(LTS)**](https://github.com/mehradi-github/de
 
 ## Installing Ansible
 Ansible automates the management of remote systems and controls their desired state. more details [**Automation with Ansible playbooks**](https://github.com/mehradi-github/automation-with-ansible-playbooks#automation-with-ansible-playbooks)
+
+
+## Installing Skaffold
+[Skaffold](https://skaffold.dev/docs/quickstart/) handles the workflow for building, pushing and deploying your application, allowing you to focus on what matters most: writing code.
+
+```sh
+# For Linux x86_64 (amd64)
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v2.0.0/skaffold-linux-amd64 && \
+sudo install skaffold /usr/local/bin/
+```
+
+
 
 <!-- ## Install Jenkins with Helm v3
 [Jenkins](https://www.jenkins.io/doc/book/installing/kubernetes/) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
