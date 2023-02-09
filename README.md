@@ -79,6 +79,14 @@ groups USERNAME
 sudo gpasswd -d USERNAME wheel
 
 
+sudo install visudo  -y
+
+sudo lsof /etc/sudoers
+kill -15 PID
+visudo
+/ALL
+USERNAME    ALL=(ALL)       ALL
+
 #scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
 #cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
 ssh-copy-id -i ~/.ssh/mykey USERNAME@<target-server>
