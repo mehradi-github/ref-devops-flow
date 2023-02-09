@@ -86,6 +86,9 @@ kill -15 PID
 visudo
 /ALL
 USERNAME    ALL=(ALL)       ALL
+# /etc/security/limits.conf or /etc/security/limits.d/90-nproc.conf
+<user>       -          nproc     2048      <<<----[ Only for "<user>" user ]
+
 
 #scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
 #cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
