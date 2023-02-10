@@ -45,6 +45,10 @@ The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigat
 
 ### Some of important Linux commands
 ```sh
+# hardware info
+cat /proc/cpuinfo
+lscpu
+
 #How to find the Linux distribution
 cat /etc/os-release
 hostnamectl
