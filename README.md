@@ -67,6 +67,8 @@ ifconfig -a
 #What Is My IP Address?
 curl ifconfig.me
 
+mv -t DESTINATION file1 file2 file3
+rm -f name*
 
 #Create a user
 useradd [options] USERNAME
