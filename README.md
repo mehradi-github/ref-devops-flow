@@ -104,6 +104,7 @@ service ssh restart
 service sshd reload
 ssh USERNAME@<target-server>
 
+# wc is used to find out number of lines, word count, byte and characters count in the files specified in the file arguments.
 sudo yum list installed | wc -l
 sudo yum list installed > my_list.txt
 sudo yum list installed | egrep -i <NAME>
