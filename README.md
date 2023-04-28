@@ -228,7 +228,27 @@ More details: [**Installing Jenkins(LTS)**](https://github.com/mehradi-github/de
 
 ## Installing Ansible
 Ansible automates the management of remote systems and controls their desired state. more details [**Automation with Ansible playbooks**](https://github.com/mehradi-github/automation-with-ansible-playbooks#automation-with-ansible-playbooks)
+```sh
+which ansible-playbook
+sudo chmod +x sample-playbook.yml
+#!~/.local/bin/ansible-playbook
+./sample-playbook.yml 
 
+# --check Dry Run
+ansible-playbook sample-playbook.yml -e "y=2" --check
+# --extra-var via json
+
+echo "{'y':36}" >> vars.json
+ansible-playbook sample-playbook.yml -e "@vars.json" --check
+
+
+ansible-playbook sample-playbook.yml -e "{'y':2,'firstname':'alex'}" --check
+
+#tags
+ansible-playbook tag-playbook.yml -t common
+ansible-playbook tag-playbook.yml --tags first,second
+ansible-playbook tag-playbook.yml --tags --list-tags
+```
 
 ## Installing Skaffold
 [Skaffold](https://skaffold.dev/docs/quickstart/) handles the workflow for building, pushing and deploying your application, allowing you to focus on what matters most: writing code.
