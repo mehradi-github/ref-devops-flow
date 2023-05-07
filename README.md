@@ -13,6 +13,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Install kubectl binary with curl](#install-kubectl-binary-with-curl)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
+    - [Install Docker manually and manage upgrades manually.](#install-docker-manually-and-manage-upgrades-manually)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Kubernetes Cluster installation using minikube](#kubernetes-cluster-installation-using-minikube)
     - [Kubernetes Cluster installation using kubeadm](#kubernetes-cluster-installation-using-kubeadm)
@@ -155,6 +156,9 @@ usermod -aG docker dockeradmin
 ## Installing Docker on Ubuntu 22.04 LTS
 
 Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package) on Ubuntu :
+
+
+### Install Docker manually and manage upgrades manually.
 ```sh
 mkdir docker && cd docker
 cat <<EOF | tee ./urls.txt >/dev/null
@@ -173,6 +177,9 @@ sudo dpkg -i ./containerd.io_1.6.9-1_amd64.deb \
   ./docker-ce-cli_23.0.5-1~ubuntu.22.04~jammy_amd64.deb \
   ./docker-buildx-plugin_0.10.4-1~ubuntu.22.04~jammy_amd64.deb \
   ./docker-compose-plugin_2.6.0~ubuntu-jammy_amd64.deb
+
+sudo systemctl start docker
+sudo docker run hello-world
 
 ```
 
