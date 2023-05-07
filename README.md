@@ -9,10 +9,9 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
     - [Some of important Linux commands](#some-of-important-linux-commands)
-  - [Setup Kubernetes (K8s)](#setup-kubernetes-k8s)
-    - [Install kubectl binary with curl](#install-kubectl-binary-with-curl)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
+    - [Set up and install Docker Engine from Docker’s apt repository](#set-up-and-install-docker-engine-from-dockers-apt-repository)
     - [Install Docker manually and manage upgrades manually.](#install-docker-manually-and-manage-upgrades-manually)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Kubernetes Cluster installation using minikube](#kubernetes-cluster-installation-using-minikube)
@@ -112,11 +111,22 @@ sudo yum list installed > my_list.txt
 sudo yum list installed | egrep -i <NAME>
 sudo yum update
 
+
+# Show proxy 
+printenv | grep -i proxy
+unset all_proxy && unset ALL_PROXY
+export all_proxy=socks5://127.0.0.1:20170/ && export ALL_PROXY=socks5://127.0.0.1:20170/
+
+# Setting Proxy for sudo
+sudo visudo -f /etc/sudoers.d/developer
+# Defaults env_keep += "no_proxy all_proxy NO_PROXY ALL_PROXY"
+source ~/.bashrc
+
+
 #Linux system shutdown | reboot
 sudo systemctl poweroff
 sudo reboot
 
-```
 
 
 ## Setup Kubernetes (K8s)
@@ -157,6 +167,25 @@ usermod -aG docker dockeradmin
 
 Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package) on Ubuntu :
 
+### Set up and install Docker Engine from Docker’s apt repository
+
+```sh
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo docker run hello-world
+```
 
 ### Install Docker manually and manage upgrades manually.
 ```sh
