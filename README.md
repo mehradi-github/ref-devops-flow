@@ -12,6 +12,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
   - [Setup Kubernetes (K8s)](#setup-kubernetes-k8s)
     - [Install kubectl binary with curl](#install-kubectl-binary-with-curl)
     - [Installing Docker](#installing-docker)
+  - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [Kubernetes Cluster installation using minikube](#kubernetes-cluster-installation-using-minikube)
     - [Kubernetes Cluster installation using kubeadm](#kubernetes-cluster-installation-using-kubeadm)
@@ -151,6 +152,20 @@ passwd dockeradmin
 usermod -aG docker dockeradmin
 
 ```
+## Installing Docker on Ubuntu 22.04 LTS
+
+Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package) on Ubuntu :
+```sh
+cat <<EOF sudo tee ./urls.txt
+https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/containerd.io_1.6.9-1_amd64.deb
+https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce_23.0.5-1~ubuntu.22.04~jammy_amd64.deb
+https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce-cli_23.0.5-1~ubuntu.22.04~jammy_amd64.deb
+https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-buildx-plugin_0.10.4-1~ubuntu.22.04~jammy_amd64.deb
+https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-compose-plugin_2.6.0~ubuntu-jammy_amd64.deb
+EOF
+
+```
+
 ### Docker Hub Quickstart
 [Docker Hub](https://docs.docker.com/docker-hub) is a service provided by Docker for finding and sharing container images with your team. It is the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
 
