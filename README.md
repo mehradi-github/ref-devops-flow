@@ -156,13 +156,18 @@ usermod -aG docker dockeradmin
 
 Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package) on Ubuntu :
 ```sh
-cat <<EOF sudo tee ./urls.txt
+mkdir docker && cd docker
+cat <<EOF | tee ./urls.txt >/dev/null
 https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/containerd.io_1.6.9-1_amd64.deb
 https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce_23.0.5-1~ubuntu.22.04~jammy_amd64.deb
 https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce-cli_23.0.5-1~ubuntu.22.04~jammy_amd64.deb
 https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-buildx-plugin_0.10.4-1~ubuntu.22.04~jammy_amd64.deb
 https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-compose-plugin_2.6.0~ubuntu-jammy_amd64.deb
 EOF
+
+
+wget -i ./urls.txt
+
 
 ```
 
