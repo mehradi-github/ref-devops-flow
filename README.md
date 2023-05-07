@@ -168,6 +168,11 @@ EOF
 
 wget -i ./urls.txt
 
+sudo dpkg -i ./containerd.io_1.6.9-1_amd64.deb \
+  ./docker-ce_23.0.5-1~ubuntu.22.04~jammy_amd64.deb \
+  ./docker-ce-cli_23.0.5-1~ubuntu.22.04~jammy_amd64.deb \
+  ./docker-buildx-plugin_0.10.4-1~ubuntu.22.04~jammy_amd64.deb \
+  ./docker-compose-plugin_2.6.0~ubuntu-jammy_amd64.deb
 
 ```
 
