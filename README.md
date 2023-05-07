@@ -181,6 +181,16 @@ sudo dpkg -i ./containerd.io_1.6.9-1_amd64.deb \
 sudo systemctl start docker
 sudo docker run hello-world
 
+# unisatall
+sudo apt remove docker-compose-plugin \
+  docker-buildx-plugin \
+  docker-ce-cli \
+  docker-ce \
+  containerd.io
+# check
+ sudo apt list --installed | grep -i docker
+ sudo apt list --installed | grep -i containerd 
+
 ```
 
 ### Docker Hub Quickstart
