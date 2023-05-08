@@ -118,8 +118,9 @@ unset all_proxy && unset ALL_PROXY
 export all_proxy=socks5://127.0.0.1:20170/ && export ALL_PROXY=socks5://127.0.0.1:20170/
 
 # Setting Proxy for sudo
-sudo visudo -f /etc/sudoers.d/developer
-# Defaults env_keep += "no_proxy all_proxy NO_PROXY ALL_PROXY"
+sudo visudo -f /etc/sudoers.d/NAME
+# Write in above file
+Defaults env_keep += "no_proxy all_proxy NO_PROXY ALL_PROXY"
 source ~/.bashrc
 
 
