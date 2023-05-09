@@ -254,7 +254,9 @@ docker push <your_username>/my-hello
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-minikube start
+#Start a cluster using the docker driver
+minikube start --driver=docker
+# minikube config set driver docker
 minikube status
 minikube ip
 
