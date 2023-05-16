@@ -49,7 +49,13 @@ The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigat
 # hardware info
 cat /proc/cpuinfo
 lscpu
-# whatis neofetch
+
+# Shows single-line descriptions
+whatis neofetch
+
+# Displays manual page of command
+man neofetch 
+
 neofetch
 
 #How to find the Linux distribution
