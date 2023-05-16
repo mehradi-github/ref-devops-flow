@@ -91,9 +91,26 @@ sudo gpasswd -d USERNAME wheel
 #The Redirection Operators (>, >>, <)
 # re-writing the file
 echo "abc" > test.txt 
+
 # append to a file
 echo "defg" >> test.txt
+
 (ls *.txt > txt-files.list && cp *.tx ~) && (ls *.rpm > rpm-packages.list && cp *.rpm ~) || echo "Precedence Test!"
+
+# The Ampersand Operator (&): execute that Linux command in the background
+gedit &
+
+# The Semicolon Operator (;): execute commands in a defined, sequential order
+pwd ; mkdir test ; cd test ; touch file
+
+# The OR Operator (||): execute the command that follows only if the preceding command fails
+bad_command || ls
+
+# The Pipe Operator (|): directs the output of the preceding command as input to the succeeding command
+cat test | grep -i "makeuseof"
+
+# The AND Operator (&&): execute commands only if the preceding command was successfully executed
+pwd && mkdir test && cd test && bad_command && ls
 
 sudo install visudo  -y
 
