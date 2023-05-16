@@ -49,6 +49,8 @@ The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigat
 # hardware info
 cat /proc/cpuinfo
 lscpu
+# whatis neofetch
+neofetch
 
 #How to find the Linux distribution
 cat /etc/os-release
@@ -85,6 +87,13 @@ groups USERNAME
 #Remove a user from a group
 sudo gpasswd -d USERNAME wheel
 
+
+#The Redirection Operators (>, >>, <)
+# re-writing the file
+echo "abc" > test.txt 
+# append to a file
+echo "defg" >> test.txt
+(ls *.txt > txt-files.list && cp *.tx ~) && (ls *.rpm > rpm-packages.list && cp *.rpm ~) || echo "Precedence Test!"
 
 sudo install visudo  -y
 
