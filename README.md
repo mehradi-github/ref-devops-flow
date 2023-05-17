@@ -93,6 +93,10 @@ groups USERNAME
 #Remove a user from a group
 sudo gpasswd -d USERNAME wheel
 
+# Compress Files
+tar -czvf logs_archive.tar.gz *
+# Extract from a compressed file
+tar -zxvf logs_archive.tar.gz -C ./log
 
 #The Redirection Operators (>, >>, <)
 # re-writing the file
