@@ -361,8 +361,24 @@ vi ~/.bash_profile
 PATH=$PATH:$HOME/bin:/usr/local/go/bin
 source ~/.bash_profile
 go version
-```
 
+mkdir -p ~/go/src/hello
+
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Printf("Hello, World\n")
+}
+```
+```sh
+cd ~/go/src/hello
+go build
+./hello
+```
 
 <!-- ## Install Jenkins with Helm v3
 [Jenkins](https://www.jenkins.io/doc/book/installing/kubernetes/) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
