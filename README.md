@@ -20,6 +20,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
   - [Installing Jenkins](#installing-jenkins)
   - [Installing Ansible](#installing-ansible)
   - [Installing Skaffold](#installing-skaffold)
+  - [Installing Go](#installing-go)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
@@ -352,6 +353,15 @@ curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v2.0.0/skaffo
 sudo install skaffold /usr/local/bin/
 ```
 
+## Installing Go
+```sh
+wget https://dl.google.com/go/go1.20.4.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
+vi ~/.bash_profile
+PATH=$PATH:$HOME/bin:/usr/local/go/bin
+source ~/.bash_profile
+go version
+```
 
 
 <!-- ## Install Jenkins with Helm v3
