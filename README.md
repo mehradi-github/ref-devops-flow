@@ -133,6 +133,8 @@ USERNAME    ALL=(ALL)       ALL
 # /etc/security/limits.conf or /etc/security/limits.d/90-nproc.conf
 <user>       -          nproc     2048      <<<----[ Only for "<user>" user ]
 
+# Removing Old host key in /home/$USER/.ssh/known_hosts 
+ssh-keygen -f "/home/$USER/.ssh/known_hosts" -R "target-server"
 
 #scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
 #cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
