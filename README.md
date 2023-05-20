@@ -360,8 +360,11 @@ sudo install skaffold /usr/local/bin/
 wget https://dl.google.com/go/go1.20.4.linux-amd64.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
 vi ~/.bash_profile
-PATH=$PATH:$HOME/bin:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin
+
 source ~/.bash_profile
+echo $PATH
+
 go version
 
 mkdir -p ~/go/src/hello
