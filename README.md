@@ -201,6 +201,11 @@ kubectl version --client --output=yaml
 ### Installing Docker
 
 ```sh
+curl -fsSL https://get.docker.com | sh
+```
+OR 
+
+```sh
 yum install docker -y
 docker -v
 
