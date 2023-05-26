@@ -5,6 +5,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
 ## Table of Contents
 - [CI/CD (DevOps flow)](#cicd-devops-flow)
   - [Table of Contents](#table-of-contents)
+  - [Run Amazon Linux 2023 on Docker](#run-amazon-linux-2023-on-docker)
   - [Run Amazon Linux 2 as a virtual machine on premises](#run-amazon-linux-2-as-a-virtual-machine-on-premises)
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
@@ -23,6 +24,13 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
   - [Installing Go](#installing-go)
 
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
+
+## Run Amazon Linux 2023 on Docker
+[Amazon Linux 2023 (AL2023)](https://github.com/amazonlinux/amazon-linux-2023#amazon-linux-2023) was released to general availability in all AWS regions on March 15, 2023.
+```sh
+docker pull amazonlinux:latest
+docker run -it amazonlinux:latest /bin/bash
+```
 
 ## Run Amazon Linux 2 as a virtual machine on premises
 Use the Amazon Linux 2 virtual machine (VM) images for on-premises development and testing.
