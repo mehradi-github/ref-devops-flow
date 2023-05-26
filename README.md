@@ -202,13 +202,12 @@ kubectl version --client --output=yaml
 
 ```sh
 curl -fsSL https://get.docker.com | sh
-```
-OR 
-
-```sh
+# OR 
 yum install docker -y
-docker -v
 
+docker -v
+```
+```sh
 # start docker services
 sudo systemctl enable docker
 sudo systemctl start docker
