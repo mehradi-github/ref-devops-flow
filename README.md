@@ -355,7 +355,7 @@ More details: [**Installing Jenkins(LTS)**](https://github.com/mehradi-github/de
 
 
 ## Installing Ansible
-Ansible automates the management of remote systems and controls their desired state. more details [**Automation with Ansible playbooks**](https://github.com/mehradi-github/automation-with-ansible-playbooks#automation-with-ansible-playbooks)
+Ansible automates the management of remote systems and controls their desired state. more details [Automation with Ansible](https://github.com/mehradi-github/ref-ansible#automation-with-ansible).
 
 
 ## Installing Skaffold
