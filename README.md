@@ -225,6 +225,14 @@ awk '/manager/ {print}' employee.txt
 awk '{print $1,$4}' employee.txt
 # ajay 45000
 # sunil 25000
+
+# Built-In Variables
+# Display Line Number
+awk '{print NR,$0}' employee.txt
+# 1 ajay manager account 45000
+# 2 sunil clerk account 25000
+
+
 ```
 
 ### Installing Docker
