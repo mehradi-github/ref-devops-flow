@@ -221,7 +221,10 @@ awk '/manager/ {print}' employee.txt
 # ajay manager account 45000
 # varun manager sales 50000
 
-
+# Splitting a Line Into Fields
+awk '{print $1,$4}' employee.txt
+# ajay 45000
+# sunil 25000
 ```
 
 ### Installing Docker
