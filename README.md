@@ -232,6 +232,11 @@ awk '{print NR,$0}' employee.txt
 # 1 ajay manager account 45000
 # 2 sunil clerk account 25000
 
+# Display Last Field
+awk '{print $1,$NF}' employee.txt
+
+
+
 
 ```
 
