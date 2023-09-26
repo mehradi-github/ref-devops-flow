@@ -1,8 +1,11 @@
 # CI/CD (DevOps flow)
+
 Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practices that aim to speed the software delivery without compromising on quality. By automating as many steps in the process as possible, CI/CD provides rapid feedback builds to shorten the time it takes to release software to users.
 
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
+
 - [CI/CD (DevOps flow)](#cicd-devops-flow)
   - [Table of Contents](#table-of-contents)
   - [Run Amazon Linux 2023 on Docker](#run-amazon-linux-2023-on-docker)
@@ -10,6 +13,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
     - [Some of important Linux commands](#some-of-important-linux-commands)
+    - [AWK command](#awk-command)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
     - [Set up and install Docker Engine from Docker’s apt repository](#set-up-and-install-docker-engine-from-dockers-apt-repository)
@@ -26,18 +30,23 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
 ![DevOps Flow](/public/assets/images/devops-flow.png "Devops Flow")
 
 ## Run Amazon Linux 2023 on Docker
+
 [Amazon Linux 2023 (AL2023)](https://github.com/amazonlinux/amazon-linux-2023#amazon-linux-2023) was released to general availability in all AWS regions on March 15, 2023.
+
 ```sh
 docker pull amazonlinux:latest
 docker run -it amazonlinux:latest /bin/bash
 ```
 
 ## Run Amazon Linux 2 as a virtual machine on premises
+
 Use the Amazon Linux 2 virtual machine (VM) images for on-premises development and testing.
 [Run Amazon Linux 2 on premises](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-linux-2-virtual-machine.html)
 
 ### Prepare the seed.iso boot image
+
 The seed.iso boot image includes the initial configuration information that is needed to boot your new VM, such as the network configuration, host name, and user data.
+
 - meta-data> – This file includes the hostname and static network settings for the VM.
 - user-data – This file configures user accounts, and specifies their passwords, key pairs, and access mechanisms.
 
@@ -45,16 +54,18 @@ The key generation utility – [PuTTYgen](https://www.puttygen.com) can create v
 
 ```sh
 ssh-keygen -f <filename> -t rsa -b 4096
-ssh-keygen -f <filename> -t dsa 
+ssh-keygen -f <filename> -t dsa
 ssh-keygen -f <filename> -t ecdsa -b 521
 ssh-keygen -f <filename> -t ed25519
 ```
 
 ### Boot and connect to your new VM
-The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigator panel, right-click the new virtual machine and choose Edit Settings. for New CD/DVD Drive, choose *seed.iso* File.
+
+The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigator panel, right-click the new virtual machine and choose Edit Settings. for New CD/DVD Drive, choose _seed.iso_ File.
 
 ### Some of important Linux commands
-```sh
+
+````sh
 # hardware info
 cat /proc/cpuinfo
 lscpu
@@ -63,7 +74,7 @@ lscpu
 whatis neofetch
 
 # Displays manual page of command
-man neofetch 
+man neofetch
 
 neofetch
 
@@ -78,7 +89,7 @@ cat /etc/group
 su - USER
 whoami
 id
- 
+
 #CTRL+L
 clear
 #Grabing an ip automatically from DHCP
@@ -109,7 +120,7 @@ tar -zxvf logs_archive.tar.gz -C ./log
 
 #The Redirection Operators (>, >>, <)
 # re-writing the file
-echo "abc" > test.txt 
+echo "abc" > test.txt
 
 # append to a file
 echo "defg" >> test.txt
@@ -141,7 +152,7 @@ USERNAME    ALL=(ALL)       ALL
 # /etc/security/limits.conf or /etc/security/limits.d/90-nproc.conf
 <user>       -          nproc     2048      <<<----[ Only for "<user>" user ]
 
-# Removing Old host key in /home/$USER/.ssh/known_hosts 
+# Removing Old host key in /home/$USER/.ssh/known_hosts
 ssh-keygen -f "/home/$USER/.ssh/known_hosts" -R "target-server"
 
 #scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
@@ -159,7 +170,7 @@ sudo yum list installed | egrep -i <NAME>
 sudo yum update
 
 
-# Show proxy 
+# Show proxy
 printenv | grep -i proxy
 unset all_proxy && unset ALL_PROXY
 export all_proxy=socks5://127.0.0.1:20170/ && export ALL_PROXY=socks5://127.0.0.1:20170/
@@ -196,17 +207,33 @@ echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
-kubectl version --client --output=yaml  
+kubectl version --client --output=yaml
+````
+
+### AWK command
+
+Awk is a scripting language used for manipulating data and generating reports.
+
+```sh
+# Print the lines which match the given pattern
+awk '/manager/ {print}' employee.txt
+# Output:
+# ajay manager account 45000
+# varun manager sales 50000
+
+
 ```
+
 ### Installing Docker
 
 ```sh
 curl -fsSL https://get.docker.com | sh
-# OR 
+# OR
 yum install docker -y
 
 docker -v
 ```
+
 ```sh
 # start docker services
 sudo systemctl enable docker
@@ -218,6 +245,7 @@ passwd dockeradmin
 usermod -aG docker dockeradmin
 
 ```
+
 ## Installing Docker on Ubuntu 22.04 LTS
 
 Install [Docker Engine](https://docs.docker.com/engine/install/ubuntu/#install-from-a-package) on Ubuntu :
@@ -243,6 +271,7 @@ sudo docker run hello-world
 ```
 
 ### Install Docker manually and manage upgrades manually.
+
 ```sh
 mkdir docker && cd docker
 cat <<EOF | tee ./urls.txt >/dev/null
@@ -273,19 +302,20 @@ sudo apt remove docker-compose-plugin \
   containerd.io
 # check
  sudo apt list --installed | grep -i docker
- sudo apt list --installed | grep -i containerd 
+ sudo apt list --installed | grep -i containerd
 
 ```
 
 ### Docker Hub Quickstart
+
 [Docker Hub](https://docs.docker.com/docker-hub) is a service provided by Docker for finding and sharing container images with your team. It is the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
 
 ```sh
 docker pull alpine:latest
 
-mkdir /home/demo && touch /home/demo/Dockerfile 
+mkdir /home/demo && touch /home/demo/Dockerfile
 cd /home/demo
-cat > Dockerfile <<EOF 
+cat > Dockerfile <<EOF
 FROM alpine:latest
 CMD echo "Hello world!"
 EOF
@@ -303,7 +333,9 @@ docker push <your_username>/my-hello
 ```
 
 ### Kubernetes Cluster installation using minikube
-[minikube](https://minikube.sigs.k8s.io/docs/start/) is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes. to install the latest minikube stable release: 
+
+[minikube](https://minikube.sigs.k8s.io/docs/start/) is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes. to install the latest minikube stable release:
+
 ```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
@@ -327,6 +359,7 @@ minikube stop
 
 
 ```
+
 ### Kubernetes Cluster installation using kubeadm
 
 Kubeadm is a tool built to provide kubeadm init and kubeadm join as best-practice "fast paths" for creating Kubernetes clusters.
@@ -334,9 +367,10 @@ kubeadm performs the actions necessary to get a minimum viable cluster up and ru
 More details: [**Kubernetes Cluster installation using kubeadm**](https://github.com/mehradi-github/Kubernetes-kubeadm#kubernetes-cluster-installation-using-kubeadm)
 
 ### Installing Helm
+
 [Helm](https://helm.sh/docs/) is the package manager for Kubernetes, Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
 
-This guide shows how to [install the Helm CLI](https://helm.sh/docs/intro/install/). 
+This guide shows how to [install the Helm CLI](https://helm.sh/docs/intro/install/).
 
 ```sh
 wget https://get.helm.sh/helm-v3.10.0-linux-amd64.tar.gz
@@ -350,15 +384,16 @@ helm repo update              # Make sure we get the latest list of charts
 ```
 
 ## Installing Jenkins
+
 [Jenkins](https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos) is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
 More details: [**Installing Jenkins(LTS)**](https://github.com/mehradi-github/devops-jenkins#installing-jenkinslts)
 
-
 ## Installing Ansible
+
 Ansible automates the management of remote systems and controls their desired state. more details [Automation with Ansible](https://github.com/mehradi-github/ref-ansible#automation-with-ansible).
 
-
 ## Installing Skaffold
+
 [Skaffold](https://skaffold.dev/docs/quickstart/) handles the workflow for building, pushing and deploying your application, allowing you to focus on what matters most: writing code.
 
 ```sh
@@ -368,6 +403,7 @@ sudo install skaffold /usr/local/bin/
 ```
 
 ## Installing Go
+
 ```sh
 wget https://dl.google.com/go/go1.20.4.linux-amd64.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
@@ -382,6 +418,7 @@ go version
 mkdir -p ~/go/src/hello
 
 ```
+
 ```go
 package main
 
@@ -391,6 +428,7 @@ func main() {
     fmt.Printf("Hello, World\n")
 }
 ```
+
 ```sh
 cd ~/go/src/hello
 go build
@@ -443,7 +481,7 @@ Open the [jenkins-values.yaml](https://raw.githubusercontent.com/jenkinsci/helm-
   # Service account name is autogenerated by default
   name: jenkins
   annotations: {}
-   ```   
+   ```
    Where `name: jenkins` refers to the serviceAccount created for jenkins.
 - We can also define which plugins we want to install on our Jenkins. We use some default plugins like git and the pipeline plugin.
 
@@ -469,7 +507,6 @@ helm install jenkins -n jenkins -f jenkins-values.yaml $chart
     echo http://$NODE_IP:$NODE_PORT/login
     ```
 3. Login with the password from step 1 and the username: admin -->
-
 
 <!-- ```sh
 kubectl get namespaces
