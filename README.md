@@ -208,6 +208,12 @@ echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 kubectl version --client --output=yaml
+
+
+chmod u+w,g+r,o-r file.txt
+chmod u=rwx,g=rw,o=rwx file.txt
+chmod 754 file.txt
+chmod -R 777 dir1
 ````
 
 ### AWK command
