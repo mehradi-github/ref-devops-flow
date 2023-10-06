@@ -214,6 +214,9 @@ chmod u+w,g+r,o-r file.txt
 chmod u=rwx,g=rw,o=rwx file.txt
 chmod 754 file.txt
 chmod -R 777 dir1
+
+ls -al *.(txt|pdf)
+sudo ln -s /home/user1/bin/myscript.sh /bin
 ````
 
 ### AWK command
