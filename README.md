@@ -217,6 +217,12 @@ chmod -R 777 dir1
 
 ls -al *.(txt|pdf)
 sudo ln -s /home/user1/bin/myscript.sh /bin
+
+# Creating job and kill it
+watch date
+ps
+kill -9 NUM
+
 ````
 
 ### AWK command
