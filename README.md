@@ -221,7 +221,21 @@ sudo ln -s /home/user1/bin/myscript.sh /bin
 # Creating job and kill it
 watch date
 ps
+kill -l
 kill -9 NUM
+
+# Redirection & Piping
+ls -l | grep sam | awk '{print $9}'
+find ./ -name "junk" 2> /dev/null > output.txt
+
+cat < output.txt > other.txt
+(cat < output.txt) > other.txt
+
+cat << EOF >>  other.txt
+> Hello
+> world
+> !
+EOF
 
 ````
 
