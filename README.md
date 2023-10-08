@@ -232,18 +232,19 @@ cat < output.txt > other.txt
 (cat < output.txt) > other.txt
 
 cat << EOF >>  other.txt
-> Hello
-> world
-> 1
-> 2
-> 3
-> 4
-> 5
+> num,date
+> 1,01/01/2023
+> 2,01/01/2022
+> 3,01/01/2021
+> 4,01/01/2020
+> 5,01/01/2019
 EOF
 
 wc other.txt
 cat other.txt | sort -g
 head -n5 other.txt | tail -n+2
+
+head -n4 other.txt | tail -n+2 | sort -r -t "/" -k 3
 
 ````
 
