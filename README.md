@@ -234,8 +234,14 @@ cat < output.txt > other.txt
 cat << EOF >>  other.txt
 > Hello
 > world
-> !
+> 1
+> 2
+> 3
+> 4
+> 5
 EOF
+
+head -n5 other.txt | tail -n+2
 
 ````
 
