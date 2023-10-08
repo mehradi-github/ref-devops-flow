@@ -13,6 +13,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
     - [Some of important Linux commands](#some-of-important-linux-commands)
+    - [SED command](#sed-command)
     - [AWK command](#awk-command)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
@@ -256,7 +257,27 @@ diff -y file1 file2
 # Converting characters of text
 cat file3 | tr [:lower:] [:upper:] > upper.txt
 head -n4 other.txt | tail -n+2 | tr ',' ':'
+
+
 ````
+
+### SED command
+
+```sh
+# s: s/regexp/replacement/
+head -n4 other.txt | sed 's/,/:/g'
+
+head -n4 other.txt | sed 's@/@#@g'
+#OR
+head -n4 other.txt | sed 's/\//#/g'
+
+# Delete range line 2 to 4.
+sed '2,4d' other.txt
+# Delete any expect range line 2 to 4.
+sed '2,4!d' other.txt
+# Multiple run command
+sed -e '2,4!d'  -e 's/,/:/g' other.txt
+```
 
 ### AWK command
 
