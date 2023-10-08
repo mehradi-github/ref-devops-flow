@@ -277,6 +277,10 @@ sed '2,4d' other.txt
 sed '2,4!d' other.txt
 # Multiple run command
 sed -e '2,4!d'  -e 's/,/:/g' other.txt
+
+# Useing regexp-extended convert date format from 11/01/2023 to 2023-11-01.
+sed -E -e '2,4!d'  -e 's/,/:/g' -e 's#([[:digit:]]{1,2})/([[:digit:]]{1,2})/([[:digit:]]{4})#\3-\1-\2#g' other.txt
+
 ```
 
 ### AWK command
