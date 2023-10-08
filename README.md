@@ -252,6 +252,10 @@ head -n4 other.txt | tail -n+2 | sort -r -t "/" -k 3
 diff file1 file2 > patch
 patch file1 patch
 diff -y file1 file2
+
+# Converting characters of text
+cat file3 | tr [:lower:] [:upper:] > upper.txt
+head -n4 other.txt | tail -n+2 | tr ',' ':'
 ````
 
 ### AWK command
