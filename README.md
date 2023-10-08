@@ -246,6 +246,12 @@ head -n5 other.txt | tail -n+2
 
 head -n4 other.txt | tail -n+2 | sort -r -t "/" -k 3
 
+
+# Comparing text files for differences
+
+diff file1 file2 > patch
+patch file1 patch
+diff -y file1 file2
 ````
 
 ### AWK command
