@@ -241,6 +241,8 @@ cat << EOF >>  other.txt
 > 5
 EOF
 
+wc other.txt
+cat other.txt | sort -g
 head -n5 other.txt | tail -n+2
 
 ````
