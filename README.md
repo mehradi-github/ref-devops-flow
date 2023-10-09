@@ -15,6 +15,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Some of important Linux commands](#some-of-important-linux-commands)
     - [SED command](#sed-command)
     - [AWK command](#awk-command)
+  - [Archiving files \& directories](#archiving-files--directories)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
     - [Set up and install Docker Engine from Docker’s apt repository](#set-up-and-install-docker-engine-from-dockers-apt-repository)
@@ -310,6 +311,30 @@ awk '{print $1,$NF}' employee.txt
 
 # Display Line From 3 to 6
 awk 'NR==3, NR==6 {print NR,$0}' employee.txt
+
+```
+
+## Archiving files & directories
+
+```sh
+# gzp & bzip2
+time gzip -k -1 file.csv
+time bzip2 -k -9 file.csv
+bzcat file.bz2 | grep -i "name" | wc -l
+gunzip file.csv.gz
+bunzip2 file.csv.bz2
+
+#  tar
+tar --exclude "build/*" --exclude ".idea/*" -acvf dir1.tar.bz2 dir1 file1 file2
+tar -tvf dir1.tar.bz2 | less
+
+# zip
+du -sh dir1
+zip -r arch dir1/
+zip -sf  arch.zip | less
+unzip arch.zip
+
+
 
 ```
 
