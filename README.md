@@ -259,6 +259,26 @@ diff -y file1 file2
 cat file3 | tr [:lower:] [:upper:] > upper.txt
 head -n4 other.txt | tail -n+2 | tr ',' ':'
 
+# Executing dynamic commands (xargs)
+ls file* | xargs -I{} mv {} {}.txt
+seq 1 10 | xargs -I{} sed '{}!d' file.csv
+seq -f "%02g" 0 9 | xargs -I{} sh -c 'sed "{}!d" file.csv >> file-{}.txt'
+
+
+dd if=dev/random of=testfile bs=500M count=1
+touch -t 2208150000 file-16.txt
+
+# Searching for files
+find . -not -name "file???"
+find -E . -print
+find -E . -regex ".*file-[[:digit:]]{2}"
+find . -empty
+find . -size -100M -or -size +500M
+find . -perm o+rwx
+find . -perm 0664
+find . -atime +120w
+find . -name "file*" -exec mv {} {}.txt \;
+
 
 ````
 
@@ -330,7 +350,10 @@ tar -tvf dir1.tar.bz2 | less
 
 # zip
 du -sh dir1
-zip -r arch dir1/
+zip -r arch dir1/ file*
+# exclude files
+zip -x dir1/.git/\* "*.jar" -r arch dir1/ file*
+
 zip -sf  arch.zip | less
 unzip arch.zip
 
