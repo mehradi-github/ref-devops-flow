@@ -13,8 +13,6 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
     - [Some of important Linux commands](#some-of-important-linux-commands)
-    - [SED command](#sed-command)
-    - [AWK command](#awk-command)
   - [Archiving files \& directories](#archiving-files--directories)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
@@ -53,13 +51,7 @@ The seed.iso boot image includes the initial configuration information that is n
 - user-data – This file configures user accounts, and specifies their passwords, key pairs, and access mechanisms.
 
 The key generation utility – [PuTTYgen](https://www.puttygen.com) can create various public-key cryptosystems including Rivest–Shamir–Adleman (RSA), Digital Signature Algorithm (DSA), Elliptic Curve Digital Signature Algorithm (ECDSA), and Edwards-curve Digital Signature Algorithm (EdDSA) keys.Although PuTTYgen collects keys in its native file format i.e. **.ppk** files, the keys can easily be converted to any file format.
-
-```sh
-ssh-keygen -f <filename> -t rsa -b 4096
-ssh-keygen -f <filename> -t dsa
-ssh-keygen -f <filename> -t ecdsa -b 521
-ssh-keygen -f <filename> -t ed25519
-```
+For more details you can see "[Essential Shell scripting for developers](https://github.com/mehradi-github/ref-shell#essential-shell-scripting-for-developers)"
 
 ### Boot and connect to your new VM
 
@@ -154,16 +146,9 @@ USERNAME    ALL=(ALL)       ALL
 # /etc/security/limits.conf or /etc/security/limits.d/90-nproc.conf
 <user>       -          nproc     2048      <<<----[ Only for "<user>" user ]
 
-# Removing Old host key in /home/$USER/.ssh/known_hosts
-ssh-keygen -f "/home/$USER/.ssh/known_hosts" -R "target-server"
 
-#scp ~/.ssh/id_rsa.pub USER@<target-server>:/root/.ssh/uploaded_key.pub
-#cat ~/.ssh/uploaded_key.pub >> ~/.ssh/authorized_keys
-ssh-copy-id -i ~/.ssh/mykey USERNAME@<target-server>
-vi /etc/ssh/sshd_config # passwordAthuntication no
-service ssh restart
-service sshd reload
-ssh USERNAME@<target-server>
+
+
 
 # wc is used to find out number of lines, word count, byte and characters count in the files specified in the file arguments.
 sudo yum list installed | wc -l
@@ -172,19 +157,7 @@ sudo yum list installed | egrep -i <NAME>
 sudo yum update
 
 
-# Show proxy
-printenv | grep -i proxy
-unset all_proxy && unset ALL_PROXY
-export all_proxy=socks5://127.0.0.1:20170/ && export ALL_PROXY=socks5://127.0.0.1:20170/
-export http_proxy=http://127.0.0.1:20171/ && export HTTP_PROXY=http://127.0.0.1:20171/
-export https_proxy=http://127.0.0.1:20171/ && export HTTPS_PROXY=http://127.0.0.1:20171/
 
-# Setting Proxy for sudo
-sudo visudo -f /etc/sudoers.d/NAME
-# Write in above file
-# Defaults env_keep += "no_proxy all_proxy NO_PROXY ALL_PROXY"
-Defaults env_keep += "no_proxy NO_PROXY http_proxy HTTP_PROXY https_proxy HTTPS_PROXY"
-source ~/.bashrc
 
 
 #Linux system shutdown | reboot
@@ -281,58 +254,6 @@ find . -name "file*" -exec mv {} {}.txt \;
 
 
 ````
-
-### SED command
-
-```sh
-# s: s/regexp/replacement/
-head -n4 other.txt | sed 's/,/:/g'
-
-head -n4 other.txt | sed 's@/@#@g'
-#OR
-head -n4 other.txt | sed 's/\//#/g'
-
-# Delete range line 2 to 4.
-sed '2,4d' other.txt
-# Delete any expect range line 2 to 4.
-sed '2,4!d' other.txt
-# Multiple run command
-sed -e '2,4!d'  -e 's/,/:/g' other.txt
-
-# Using regexp-extended convert date format from 11/01/2023 to 2023-11-1.
-sed -E -e '2,4!d'  -e 's/,/:/g' -e 's#([[:digit:]]{1,2})/([[:digit:]]{1,2})/([[:digit:]]{4})#\3-\1-\2#g' other.txt
-
-```
-
-### AWK command
-
-Awk is a scripting language used for manipulating data and generating reports.
-
-```sh
-# Print the lines which match the given pattern
-awk '/manager/ {print}' employee.txt
-# Output:
-# ajay manager account 45000
-# varun manager sales 50000
-
-# Splitting a Line Into Fields
-awk '{print $1,$4}' employee.txt
-# ajay 45000
-# sunil 25000
-
-# Built-In Variables
-# Display Line Number
-awk '{print NR,$0}' employee.txt
-# 1 ajay manager account 45000
-# 2 sunil clerk account 25000
-
-# Display Last Field
-awk '{print $1,$NF}' employee.txt
-
-# Display Line From 3 to 6
-awk 'NR==3, NR==6 {print NR,$0}' employee.txt
-
-```
 
 ## Archiving files & directories
 
