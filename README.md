@@ -12,8 +12,8 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
   - [Run Amazon Linux 2 as a virtual machine on premises](#run-amazon-linux-2-as-a-virtual-machine-on-premises)
     - [Prepare the seed.iso boot image](#prepare-the-seediso-boot-image)
     - [Boot and connect to your new VM](#boot-and-connect-to-your-new-vm)
-    - [Some of important Linux commands](#some-of-important-linux-commands)
-  - [Archiving files \& directories](#archiving-files--directories)
+  - [Setup Kubernetes (K8s)](#setup-kubernetes-k8s)
+    - [Install kubectl binary with curl](#install-kubectl-binary-with-curl)
     - [Installing Docker](#installing-docker)
   - [Installing Docker on Ubuntu 22.04 LTS](#installing-docker-on-ubuntu-2204-lts)
     - [Set up and install Docker Engine from Docker’s apt repository](#set-up-and-install-docker-engine-from-dockers-apt-repository)
@@ -57,120 +57,12 @@ For more details you can see "[Essential Shell scripting for developers](https:/
 
 The steps vary depending on your chosen VM platform. e.g. VMware: In the Navigator panel, right-click the new virtual machine and choose Edit Settings. for New CD/DVD Drive, choose _seed.iso_ File.
 
-### Some of important Linux commands
-
-````sh
-# hardware info
-cat /proc/cpuinfo
-lscpu
-
-# Shows single-line descriptions
-whatis neofetch
-
-# Displays manual page of command
-man neofetch
-
-neofetch
-
-#How to find the Linux distribution
-cat /etc/os-release
-hostnamectl
-#User List
-cat /etc/passwd
-#Group list
-cat /etc/group
-
-su - USER
-whoami
-id
-
-#CTRL+L
-clear
-#Grabing an ip automatically from DHCP
-dhclient -v
-
-#Display all interfaces which are currently available, even if down
-ifconfig -a
-#What Is My IP Address?
-curl ifconfig.me
-
-mv -t DESTINATION file1 file2 file3
-rm -f name*
-
-#Create a user
-useradd [options] USERNAME
-passwd USERNAME
-#Assigning Sudo Rights to a user
-usermod -aG wheel USERNAME
-groups USERNAME
-
-#Remove a user from a group
-sudo gpasswd -d USERNAME wheel
-
-# Compress Files
-tar -czvf logs_archive.tar.gz *
-# Extract from a compressed file
-tar -zxvf logs_archive.tar.gz -C ./log
-
-#The Redirection Operators (>, >>, <)
-# re-writing the file
-echo "abc" > test.txt
-
-# append to a file
-echo "defg" >> test.txt
-
-(ls *.txt > txt-files.list && cp *.tx ~) && (ls *.rpm > rpm-packages.list && cp *.rpm ~) || echo "Precedence Test!"
-
-# The Ampersand Operator (&): execute that Linux command in the background
-gedit &
-
-# The Semicolon Operator (;): execute commands in a defined, sequential order
-pwd ; mkdir test ; cd test ; touch file
-
-# The OR Operator (||): execute the command that follows only if the preceding command fails
-bad_command || ls
-
-# The Pipe Operator (|): directs the output of the preceding command as input to the succeeding command
-cat test | grep -i "makeuseof"
-
-# The AND Operator (&&): execute commands only if the preceding command was successfully executed
-pwd && mkdir test && cd test && bad_command && ls
-
-sudo install visudo  -y
-
-sudo lsof /etc/sudoers
-kill -15 PID
-visudo
-/ALL
-USERNAME    ALL=(ALL)       ALL
-# /etc/security/limits.conf or /etc/security/limits.d/90-nproc.conf
-<user>       -          nproc     2048      <<<----[ Only for "<user>" user ]
-
-
-
-
-
-# wc is used to find out number of lines, word count, byte and characters count in the files specified in the file arguments.
-sudo yum list installed | wc -l
-sudo yum list installed > my_list.txt
-sudo yum list installed | egrep -i <NAME>
-sudo yum update
-
-
-
-
-
-#Linux system shutdown | reboot
-sudo systemctl poweroff
-sudo reboot
-
-
-
 ## Setup Kubernetes (K8s)
+
 [Kubernetes](https://kubernetes.io/docs/concepts/overview), also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
 
-
 ### Install kubectl binary with curl
+
 [Install and Set Up kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux)
 
 ```sh
@@ -193,90 +85,8 @@ chmod -R 777 dir1
 ls -al *.(txt|pdf)
 sudo ln -s /home/user1/bin/myscript.sh /bin
 
-# Creating job and kill it
-watch date
-ps
-kill -l
-kill -9 NUM
-
-# Redirection & Piping
-ls -l | grep sam | awk '{print $9}'
-find ./ -name "junk" 2> /dev/null > output.txt
-
-cat < output.txt > other.txt
-(cat < output.txt) > other.txt
-
-cat << EOF >>  other.txt
-> num,date
-> 1,01/01/2023
-> 2,01/01/2022
-> 3,01/01/2021
-> 4,01/01/2020
-> 5,01/01/2019
-EOF
-
-wc other.txt
-cat other.txt | sort -g
-head -n5 other.txt | tail -n+2
-
-head -n4 other.txt | tail -n+2 | sort -r -t "/" -k 3
 
 
-# Comparing text files for differences
-
-diff file1 file2 > patch
-patch file1 patch
-diff -y file1 file2
-
-# Converting characters of text
-cat file3 | tr [:lower:] [:upper:] > upper.txt
-head -n4 other.txt | tail -n+2 | tr ',' ':'
-
-# Executing dynamic commands (xargs)
-ls file* | xargs -I{} mv {} {}.txt
-seq 1 10 | xargs -I{} sed '{}!d' file.csv
-seq -f "%02g" 0 9 | xargs -I{} sh -c 'sed "{}!d" file.csv >> file-{}.txt'
-
-
-dd if=dev/random of=testfile bs=500M count=1
-touch -t 2208150000 file-16.txt
-
-# Searching for files
-find . -not -name "file???"
-find -E . -print
-find -E . -regex ".*file-[[:digit:]]{2}"
-find . -empty
-find . -size -100M -or -size +500M
-find . -perm o+rwx
-find . -perm 0664
-find . -atime +120w
-find . -name "file*" -exec mv {} {}.txt \;
-
-
-````
-
-## Archiving files & directories
-
-```sh
-# gzp & bzip2
-time gzip -k -1 file.csv
-time bzip2 -k -9 file.csv
-bzcat file.bz2 | grep -i "name" | wc -l
-gunzip file.csv.gz
-bunzip2 file.csv.bz2
-
-#  tar
-tar --exclude "build/*" --exclude ".idea/*" -acvf dir1.tar.bz2 dir1 file1 file2
-tar -tvf dir1.tar.bz2 | less
-
-# zip
-du -sh dir1
-zip -r arch dir1/ file*
-# exclude files
-zip -x dir1/.git/\* "*.jar" -r arch dir1/ file*
-
-zip -sf  arch.zip | less
-unzip arch.zip
 
 
 
