@@ -20,6 +20,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Install Docker manually and manage upgrades manually.](#install-docker-manually-and-manage-upgrades-manually)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
     - [What is the different between "run" and "exec"](#what-is-the-different-between-run-and-exec)
+    - [Configure the Docker client](#configure-the-docker-client)
     - [Kubernetes Cluster installation using minikube](#kubernetes-cluster-installation-using-minikube)
     - [Kubernetes Cluster installation using kubeadm](#kubernetes-cluster-installation-using-kubeadm)
     - [Installing Helm](#installing-helm)
@@ -209,6 +210,23 @@ docker push <your_username>/my-hello
 docker run  #{image} -it /bin/bash
 
 docker exec -it #{container} /bin/bash
+```
+
+### Configure the Docker client
+
+~/.docker/config.json
+
+```json
+{
+  "proxies": {
+    "default": {
+      "httpProxy": "http://proxy.example.com:3128",
+      "httpsProxy": "https://proxy.example.com:3129",
+      "allProxy": "socks5://proxy.example.com:3130",
+      "noProxy": "*.test.example.com,.example.org,127.0.0.0/8"
+    }
+  }
+}
 ```
 
 ### Kubernetes Cluster installation using minikube
