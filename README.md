@@ -229,6 +229,18 @@ docker exec -it #{container} /bin/bash
 }
 ```
 
+OR manually set proxy in container:
+
+```sh
+#set
+export all_proxy=socks5://127.0.0.1:1089/ && export ALL_PROXY=socks5://127.0.0.1:1089/
+export http_proxy=http://127.0.0.1:8889/ && export HTTP_PROXY=http://127.0.0.1:8889/
+export https_proxy=http://127.0.0.1:8889/ && export HTTPS_PROXY=http://127.0.0.1:8889/
+export NO_PROXY=localhost,127.0.0.1,172.17.0.1,172.17.0.2 && export no_proxy=localhost,127.0.0.1,172.17.0.1,172.17.0.2
+# unset
+unset all_proxy && unset ALL_PROXY && unset http_proxy && unset HTTP_PROXY && unset https_proxy && unset HTTPS_PROXY && unset NO_PROXY && unset no_proxy
+```
+
 ### Kubernetes Cluster installation using minikube
 
 [minikube](https://minikube.sigs.k8s.io/docs/start/) is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes. to install the latest minikube stable release:
