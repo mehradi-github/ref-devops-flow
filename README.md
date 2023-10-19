@@ -19,6 +19,7 @@ Continuous integration(CI), continuous delivery/deployment(CD) are DevOps practi
     - [Set up and install Docker Engine from Docker’s apt repository](#set-up-and-install-docker-engine-from-dockers-apt-repository)
     - [Install Docker manually and manage upgrades manually.](#install-docker-manually-and-manage-upgrades-manually)
     - [Docker Hub Quickstart](#docker-hub-quickstart)
+    - [What is the different between "run" and "exec"](#what-is-the-different-between-run-and-exec)
     - [Kubernetes Cluster installation using minikube](#kubernetes-cluster-installation-using-minikube)
     - [Kubernetes Cluster installation using kubeadm](#kubernetes-cluster-installation-using-kubeadm)
     - [Installing Helm](#installing-helm)
@@ -198,6 +199,16 @@ docker run <your_username>/my-hello
 docker login
 docker push <your_username>/my-hello
 
+```
+
+### What is the different between "run" and "exec"
+
+"docker run" has its target as docker images and "docker exec" is targeting pre-existing docker containers.
+
+```sh
+docker run  #{image} -it /bin/bash
+
+docker exec -it #{container} /bin/bash
 ```
 
 ### Kubernetes Cluster installation using minikube
