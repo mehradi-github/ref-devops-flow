@@ -5,7 +5,7 @@
 	filemode = true
 	bare = false
 	logallrefupdates = true
-	sshCommand = ssh -i ~/.ssh/id_rsa    // <=========***
+	sshCommand = ssh -i ~/.ssh/id_rsa    // <=========*** git config --local core.sshCommand "ssh -i /path/to/private_key"
 [submodule]
 	active = .
 [remote "origin"]
@@ -15,5 +15,5 @@
 	remote = origin
 	merge = refs/heads/main
 [user]
-	email = EMAIL   // <=========***
-	name = NAME     // <=========***
+	email = EMAIL   // <=========*** git config --local user.email "EMAIL"
+	name = NAME     // <=========*** git config --local user.name "NAME"
